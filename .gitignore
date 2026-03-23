@@ -1,0 +1,41 @@
+## Ignore build outputs
+/bin/
+/obj/
+/Debug/
+/Release/
+
+## Visual Studio / Rider / VS Code
+/.vs/
+/.vscode/
+.idea/
+
+## User-specific files
+*.user
+*.suo
+*.userprefs
+
+## NuGet
+*.nupkg
+/packages/
+
+## Build artifacts
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.meta
+
+## Publish output
+/publish/
+
+## Logs and database files
+*.log
+*.sqlite
+
+## OS files
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Rider cache
+.rider/
