@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi;
 using PropertyHubAPI.Models;
 
@@ -33,6 +34,9 @@ public class Program
                     policy.WithOrigins("https://localhost:7258")
                           .AllowAnyHeader()
                           .AllowAnyMethod();
+                    policy.WithOrigins("http://localhost:4200")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
                 });
         });
 
@@ -42,8 +46,15 @@ public class Program
 
         var app = builder.Build();
 
+        var mediaPath = Path.Combine(app.Environment.ContentRootPath, "Media");
+
         // Middleware pipeline (correct order)
         app.UseHttpsRedirection();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(mediaPath),
+            RequestPath = "/media"
+        });
         app.UseRouting();
         app.UseCors("AllowSpecificOrigin");
         app.UseAuthentication();
